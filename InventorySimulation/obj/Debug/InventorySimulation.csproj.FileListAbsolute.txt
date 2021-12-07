@@ -65,3 +65,16 @@ C:\Users\Osama\Dropbox\Simulation 2017-2018\[Simulation & Modeling 2017-2018] St
 D:\[1] University Work\[0] Ain Shams Work\My Stuff\Simulation'\[Simulation & Modeling 2017-2018] Students\lab 11\[students]_template\inventorysimulation\InventorySimulation\bin\Debug\InventorySimulation.exe.config
 D:\[1] University Work\[0] Ain Shams Work\My Stuff\Simulation'\[Simulation & Modeling 2017-2018] Students\lab 11\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.exe
 D:\[1] University Work\[0] Ain Shams Work\My Stuff\Simulation'\[Simulation & Modeling 2017-2018] Students\lab 11\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.pdb
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\bin\Debug\InventorySimulation.exe.config
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\bin\Debug\InventorySimulation.exe
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\bin\Debug\InventorySimulation.pdb
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\bin\Debug\InventoryModels.dll
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\bin\Debug\InventoryModels.pdb
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.csprojAssemblyReference.cache
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.Form1.resources
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.Properties.Resources.resources
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.csproj.GenerateResource.cache
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.csproj.CoreCompileInputs.cache
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.csproj.CopyComplete
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.exe
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventorySimulation\obj\Debug\InventorySimulation.pdb

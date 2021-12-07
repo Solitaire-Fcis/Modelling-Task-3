@@ -21,3 +21,9 @@ C:\Users\Osama\Dropbox\Simulation 2017-2018\[Simulation & Modeling 2017-2018] St
 C:\Users\Osama\Dropbox\Simulation 2017-2018\[Simulation & Modeling 2017-2018] Students\Lab 11\[Students]_Template\InventorySimulation\InventoryModels\bin\Debug\InventoryModels.pdb
 C:\Users\Osama\Dropbox\Simulation 2017-2018\[Simulation & Modeling 2017-2018] Students\Lab 11\[Students]_Template\InventorySimulation\InventoryModels\obj\Debug\InventoryModels.dll
 C:\Users\Osama\Dropbox\Simulation 2017-2018\[Simulation & Modeling 2017-2018] Students\Lab 11\[Students]_Template\InventorySimulation\InventoryModels\obj\Debug\InventoryModels.pdb
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\bin\Debug\InventoryModels.dll
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\bin\Debug\InventoryModels.pdb
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\obj\Debug\InventoryModels.csprojAssemblyReference.cache
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\obj\Debug\InventoryModels.csproj.CoreCompileInputs.cache
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\obj\Debug\InventoryModels.dll
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\obj\Debug\InventoryModels.pdb
