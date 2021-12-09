@@ -18,9 +18,10 @@ namespace InventorySimulation
         public string[] lines = File.ReadAllLines(@"TestCase1.txt");
         public SimulationSystem SimSys = new SimulationSystem();
         public SimulationCase sc = new SimulationCase();
+        public List<int> DaysUntilOrderArrives = new List<int>();
         decimal DemDistCummCounter = 0;
         Random rand = new Random();
-        int CycleCounter = 1, DayWithinCycle = 1,ending;
+        int DayWithinCycle = 1, DayCounter = 0, OrderQ = 0;
 
         public Form1()
         {
@@ -81,7 +82,7 @@ namespace InventorySimulation
                         string[] LeadDaysRow = lines[i].Trim().Replace(" ", String.Empty).Split(',');
                         if (lines[i - 1] == "LeadDaysDistribution")
                         {
-                            decimal prob = decimal.Parse(LeadDaysRow[1]) * 10;
+                            decimal prob = decimal.Parse(LeadDaysRow[1]) * 100;
                             LeadDaysDistTemp.Value = int.Parse(LeadDaysRow[0]);
                             LeadDaysDistTemp.Probability = prob;
                             LeadDaysDistTemp.CummProbability = (int)prob;
@@ -91,7 +92,7 @@ namespace InventorySimulation
                         }
                         else
                         {
-                            decimal prob = decimal.Parse(LeadDaysRow[1]) * 10;
+                            decimal prob = decimal.Parse(LeadDaysRow[1]) * 100;
                             LeadDaysDistTemp.Value = int.Parse(LeadDaysRow[0]);
                             LeadDaysDistTemp.Probability = prob;
                             DemDistCummCounter = LeadDaysDist[j - 1].CummProbability + (int)prob;
@@ -104,6 +105,7 @@ namespace InventorySimulation
                     }
                     SimSys.LeadDaysDistribution = LeadDaysDist;
                 }
+                
             }
             
         }
@@ -155,8 +157,149 @@ namespace InventorySimulation
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            int DayCounter = 1,DaysUntilOrderArrives=SimSys.StartLeadDays;
-            bool flag = false;
+            // Initial Helper Variables
+            int ShortQ = 0, EndingQ = 0;
+            DaysUntilOrderArrives.Add(SimSys.StartLeadDays-1);
+            while (DayCounter < SimSys.NumberOfDays)
+            {
+                SimulationCase SimulationCasesTemp = new SimulationCase();
+                // Initial Static Values Assignment  
+                SimulationCasesTemp.Day = DayCounter + 1;
+                SimulationCasesTemp.Cycle = GetCycle(SimulationCasesTemp.Day);
+                SimulationCasesTemp.RandomDemand = Generate("Hundreds");
+                SimulationCasesTemp.Demand = GetDemand(SimulationCasesTemp.RandomDemand);
+                SimulationCasesTemp.LeadDays = 0;
+                SimulationCasesTemp.ShortageQuantity = 0;
+                if(DayWithinCycle != SimSys.ReviewPeriod)
+                    DayWithinCycle = DayWithinCycle % SimSys.ReviewPeriod;
+                SimulationCasesTemp.DayWithinCycle = DayWithinCycle;
+                    ;
+                System.Threading.Thread.Sleep(20);
+                // Beginning Inventory Control
+                if (DayCounter == 0)
+                {
+                    SimulationCasesTemp.BeginningInventory = SimSys.StartInventoryQuantity;
+                    SimulationCasesTemp.EndingInventory = SimulationCasesTemp.BeginningInventory - SimulationCasesTemp.Demand;
+                    if (SimulationCasesTemp.EndingInventory < 0)
+                    {
+                        SimulationCasesTemp.ShortageQuantity = Math.Abs(SimulationCasesTemp.EndingInventory);
+                        SimulationCasesTemp.EndingInventory = 0;
+                    }
+                }
+                else 
+                {
+                    if (DaysUntilOrderArrives[DayCounter] == -1 && DayCounter / SimSys.ReviewPeriod == 0)
+                        SimulationCasesTemp.BeginningInventory = SimSys.SimulationCases[DayCounter - 1].EndingInventory
+                            + SimSys.StartOrderQuantity;
+                    else if (DaysUntilOrderArrives[DayCounter] == -1 && DayCounter / SimSys.ReviewPeriod != 0 && DayWithinCycle != SimSys.ReviewPeriod)
+                        SimulationCasesTemp.BeginningInventory = SimSys.SimulationCases[DayCounter - 1].EndingInventory + OrderQ;
+                    else
+                        SimulationCasesTemp.BeginningInventory = SimSys.SimulationCases[DayCounter - 1].EndingInventory;
+                    SimulationCasesTemp.EndingInventory = EndingQ = SimulationCasesTemp.BeginningInventory - (SimulationCasesTemp.Demand + SimSys.SimulationCases[DayCounter - 1].ShortageQuantity);
+                    if (SimulationCasesTemp.EndingInventory <= 0)
+                    {
+                        SimulationCasesTemp.ShortageQuantity = ShortQ = Math.Abs(SimulationCasesTemp.EndingInventory);
+                        SimulationCasesTemp.EndingInventory = EndingQ = 0;
+                    }
+                    else
+                        ShortQ = 0;
+                }
+                System.Threading.Thread.Sleep(20);
+
+                // Cycle Order Control
+                if (SimulationCasesTemp.DayWithinCycle == 5)
+                {
+                    SimulationCasesTemp.OrderQuantity = OrderQ = GetOrderQuantity(
+                       EndingQ,
+                       ShortQ);
+                    SimulationCasesTemp.RandomLeadDays = Generate("Hundreds");
+                    SimulationCasesTemp.LeadDays = GetLeadDays(SimulationCasesTemp.RandomLeadDays);
+                    DaysUntilOrderArrives[DayCounter] = SimulationCasesTemp.LeadDays;
+                }
+                else
+                {
+                    SimulationCasesTemp.OrderQuantity = 0;
+                    SimulationCasesTemp.RandomLeadDays = 0;
+                }
+                System.Threading.Thread.Sleep(20);
+                // Lead Days Control
+                if (DaysUntilOrderArrives[DayCounter] >= -1)
+                    DaysUntilOrderArrives.Add(DaysUntilOrderArrives[DayCounter] - 1);
+                else
+                    DaysUntilOrderArrives.Add(0);
+                // Counters Control
+                SimSys.SimulationCases.Add(SimulationCasesTemp);
+                DayWithinCycle++;
+                DayCounter++;
+            }
+
+            for (int i = 0; i < DaysUntilOrderArrives.Count; i++)
+                if (DaysUntilOrderArrives[i] < 0)
+                    DaysUntilOrderArrives[i] = 0;
+            System.Threading.Thread.Sleep(20);
+            DataTable dt = FinishFilling();
+            decimal ShortSum = 0, EndinSum = 0;
+            for (int i = 0; i < SimSys.SimulationCases.Count; i++)
+            { 
+                dt.Rows.Add(
+                 SimSys.SimulationCases[i].Day,
+                 SimSys.SimulationCases[i].Cycle,
+                 SimSys.SimulationCases[i].DayWithinCycle,
+                 SimSys.SimulationCases[i].BeginningInventory,
+                 SimSys.SimulationCases[i].RandomDemand,
+                 SimSys.SimulationCases[i].Demand,
+                 SimSys.SimulationCases[i].EndingInventory,
+                 SimSys.SimulationCases[i].ShortageQuantity,
+                 SimSys.SimulationCases[i].OrderQuantity,
+                 SimSys.SimulationCases[i].RandomLeadDays,
+                 SimSys.SimulationCases[i].LeadDays,
+                 DaysUntilOrderArrives[i]
+                 );
+                ShortSum += SimSys.SimulationCases[i].ShortageQuantity;
+                EndinSum += SimSys.SimulationCases[i].EndingInventory;
+            }
+            PerformanceMeasures PM = new PerformanceMeasures();
+            PM.ShortageQuantityAverage = ShortSum/SimSys.SimulationCases.Count;
+            PM.EndingInventoryAverage = EndinSum/SimSys.SimulationCases.Count;
+            SimSys.PerformanceMeasures = PM;
+            string TM = TestingManager.Test(SimSys, Constants.FileNames.TestCase1);
+            MessageBox.Show(TM);
+        }
+        public int Generate(string type)
+        {
+            if (type == "Tens")
+                return rand.Next(1, 10);
+            else if (type == "Hundreds")
+                return rand.Next(1, 101);
+            else
+                return 0;
+        }
+        public int GetDemand(int Random)
+        {
+            for (int i = 0; i < SimSys.DemandDistribution.Count; i++)
+                if (Random>=SimSys.DemandDistribution[i].MinRange &&Random<=SimSys.DemandDistribution[i].MaxRange)
+                    return SimSys.DemandDistribution[i].Value;
+            return -1;
+        }
+        public int GetLeadDays(int Random)
+        {
+            for (int i = 0; i < SimSys.LeadDaysDistribution.Count; i++)
+                if (Random >= SimSys.LeadDaysDistribution[i].MinRange && Random <= SimSys.LeadDaysDistribution[i].MaxRange)
+                    return SimSys.LeadDaysDistribution[i].Value;
+            return -1;
+        }
+        public int GetCycle(int Day)
+        {
+            if (Day % SimSys.ReviewPeriod == 0)
+                return (Day / SimSys.ReviewPeriod);
+            return (Day / SimSys.ReviewPeriod) + 1;
+        }
+        public int GetOrderQuantity(int EndingE,int ShortQ)
+        {
+            return OrderQ = SimSys.OrderUpTo - EndingE + ShortQ;
+        }
+        public DataTable FinishFilling()
+        {
             DataTable dt = new DataTable();
             dt.Columns.Add("Day");
             dt.Columns.Add("Cycle");
@@ -177,148 +320,7 @@ namespace InventorySimulation
             textBox4.Text = SimSys.StartLeadDays.ToString();
             textBox5.Text = SimSys.StartOrderQuantity.ToString();
             textBox6.Text = SimSys.NumberOfDays.ToString();
-            List<SimulationCase> SimulationCases = new List<SimulationCase>();
-            
-            while (DayCounter <= SimSys.NumberOfDays)
-            {
-                SimulationCase SimulationCasesTemp = new SimulationCase();
-                SimulationCasesTemp.Day = DayCounter;
-                SimulationCasesTemp.Cycle = GetCycle(SimulationCasesTemp.Day);
-                SimulationCasesTemp.DayWithinCycle = DayWithinCycle;
-                DayWithinCycle++;
-                if (DayWithinCycle>SimSys.ReviewPeriod)
-                {
-                    DayWithinCycle = 1;
-                }
-                //Begining inventory Assign Start
-                if (DayCounter==1)
-                {
-                    SimulationCasesTemp.BeginningInventory = SimSys.StartInventoryQuantity;
-                }
-                else if (flag)
-                {
-                    SimulationCasesTemp.BeginningInventory += SimSys.StartOrderQuantity;
-                    flag = false;
-                }
-                else
-                {
-                    SimulationCasesTemp.BeginningInventory = ending;
-                }
-                //Begining inventory Assign End
-
-                SimulationCasesTemp.RandomDemand=Generate("Hundreds");
-                SimulationCasesTemp.Demand = GetDemand(SimulationCasesTemp.RandomDemand);
-                SimulationCasesTemp.EndingInventory = SimulationCasesTemp.BeginningInventory- SimulationCasesTemp.Demand;
-                if (SimulationCasesTemp.EndingInventory<0)
-                {
-                    SimulationCasesTemp.ShortageQuantity = Math.Abs(SimulationCasesTemp.EndingInventory);
-                    SimulationCasesTemp.EndingInventory = 0;
-                    ending = SimulationCasesTemp.EndingInventory;
-                }
-                else
-                {
-                    SimulationCasesTemp.ShortageQuantity = 0;
-                    ending=SimulationCasesTemp.EndingInventory;
-                }
-                if (SimulationCasesTemp.DayWithinCycle==5)
-                {
-                    SimulationCasesTemp.OrderQuantity = GetOrderQuantity(SimulationCasesTemp.EndingInventory, SimulationCasesTemp.ShortageQuantity);
-                    SimulationCasesTemp.RandomLeadDays = Generate("Tens");
-                    SimulationCasesTemp.LeadDays = GetLeadDays(SimulationCasesTemp.RandomLeadDays);
-                }
-                else
-                {
-                    SimulationCasesTemp.OrderQuantity = 0;
-                    SimulationCasesTemp.RandomLeadDays =0;
-                    SimulationCasesTemp.LeadDays = 0;
-                }
-                SimulationCases.Add(SimulationCasesTemp);
-                DaysUntilOrderArrives--;
-                if (DaysUntilOrderArrives==0)
-                {
-                    flag = true;
-                    if (!(SimulationCasesTemp.DayWithinCycle< SimSys.ReviewPeriod))
-                    {
-                        DaysUntilOrderArrives = SimulationCasesTemp.LeadDays;
-                    }
-                }
-                DayCounter++;
-            }
-            SimSys.SimulationCases = SimulationCases;
-
-            for (int i = 0; i < SimSys.SimulationCases.Count; i++)
-            {
-                dt.Rows.Add(
-                    SimSys.SimulationCases[i].Day,
-                    SimSys.SimulationCases[i].Cycle,
-                    SimSys.SimulationCases[i].DayWithinCycle,
-                    SimSys.SimulationCases[i].BeginningInventory,
-                    SimSys.SimulationCases[i].RandomDemand,
-                    SimSys.SimulationCases[i].Demand,
-                    SimSys.SimulationCases[i].EndingInventory,
-                    SimSys.SimulationCases[i].ShortageQuantity,
-                    SimSys.SimulationCases[i].OrderQuantity,
-                    SimSys.SimulationCases[i].RandomLeadDays,
-                    SimSys.SimulationCases[i].LeadDays
-                    );
-            }
+            return dt;
         }
-        public int Generate(string type)
-        {
-            if (type == "Tens")
-            {
-                int generated = rand.Next(1, 10);
-                return generated;
-            }
-            else if (type == "Hundreds")
-            {
-                int generated = rand.Next(1, 101);
-                return generated;
-            }
-            else
-                return 0;
-        }
-        public int GetDemand(int Random)
-        {
-            for (int i = 0; i < SimSys.DemandDistribution.Count; i++)
-            {
-                if (Random>=SimSys.DemandDistribution[i].MinRange &&Random<=SimSys.DemandDistribution[i].MaxRange)
-                {
-                    return SimSys.DemandDistribution[i].Value;
-                }
-            }
-            return -1;
-        }
-        public int GetLeadDays(int Random)
-        {
-            for (int i = 0; i < SimSys.LeadDaysDistribution.Count; i++)
-            {
-                if (Random >= SimSys.LeadDaysDistribution[i].MinRange && Random <= SimSys.LeadDaysDistribution[i].MaxRange)
-                {
-                    return SimSys.LeadDaysDistribution[i].Value;
-                }
-            }
-            return 0;
-        }
-        public int GetCycle(int Day)
-        {
-            int CycleCounterTemp;
-            if (Day%SimSys.ReviewPeriod==0)
-            {
-                CycleCounterTemp = CycleCounter;
-                CycleCounter++;
-                return CycleCounterTemp;
-            }
-            else
-            {
-                return CycleCounter;
-            }
-        }
-        public int GetOrderQuantity(int EndingE,int ShortQ)
-        {
-            return SimSys.OrderUpTo-EndingE+ShortQ;
-        }
-      
-       
     }
 }

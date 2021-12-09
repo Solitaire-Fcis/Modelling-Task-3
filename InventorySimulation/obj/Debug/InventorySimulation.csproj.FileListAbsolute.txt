@@ -90,3 +90,16 @@ E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventorySimulation\obj\Debug\
 E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.csproj.CoreCompileInputs.cache
 E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.exe
 E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.pdb
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\bin\Debug\InventorySimulation.exe.config
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\bin\Debug\InventorySimulation.exe
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\bin\Debug\InventorySimulation.pdb
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\bin\Debug\InventoryModels.dll
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\bin\Debug\InventoryModels.pdb
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.csprojAssemblyReference.cache
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.Form1.resources
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.Properties.Resources.resources
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.csproj.GenerateResource.cache
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.csproj.CoreCompileInputs.cache
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.csproj.CopyComplete
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.exe
+E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Tasks\Modelling-Task-3\Modelling-Task-3\Modelling-Task-3\InventorySimulation\obj\Debug\InventorySimulation.pdb
