@@ -27,3 +27,9 @@ E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\i
 E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\obj\Debug\InventoryModels.csproj.CoreCompileInputs.cache
 E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\obj\Debug\InventoryModels.dll
 E:\Work\FCIS\4th Year\CS\Modeling and Simulation\Labs\Lab4\[students]_template\inventorysimulation\InventoryModels\obj\Debug\InventoryModels.pdb
+E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventoryModels\bin\Debug\InventoryModels.dll
+E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventoryModels\bin\Debug\InventoryModels.pdb
+E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventoryModels\obj\Debug\InventoryModels.csproj.AssemblyReference.cache
+E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventoryModels\obj\Debug\InventoryModels.csproj.CoreCompileInputs.cache
+E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventoryModels\obj\Debug\InventoryModels.dll
+E:\My Study\Study 4th Year\Tasks\Modelling-Task-3\InventoryModels\obj\Debug\InventoryModels.pdb
